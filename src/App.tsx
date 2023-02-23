@@ -2,18 +2,15 @@ import React from 'react';
 import { UploadOutlined, UserOutlined, VideoCameraOutlined } from '@ant-design/icons';
 import { Layout, Menu, theme } from 'antd';
 import GetRouters from './router';
-import { HashRouter } from 'react-router-dom';
+import { HashRouter,Link,useRoutes } from 'react-router-dom';
 import './App.scss';
-
 const { Header, Content, Footer, Sider } = Layout;
 
 const App: React.FC = () => {
   const {
     token: { colorBgContainer },
   } = theme.useToken();
-
   return (
-
     <Layout style={{ height: '100vh' }}>
       <Sider
         breakpoint="lg"

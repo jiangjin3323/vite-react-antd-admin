@@ -1,12 +1,23 @@
-import { useRoutes,RouteObject,Navigate } from 'react-router-dom';
-import Home from '../pages/index/index';  
-const GetRouters = () =>{
-    const routes:RouteObject[] = useRoutes([
+import Home from '../pages/index/index';
+import Login from '../pages/login/index';
+import User from '../pages/user/index';
+import { RouteObject, useRoutes, Navigate } from 'react-router-dom';
+const GetRouters = () => {
+    const routes: RouteObject[] = [
         {
             path: '/',
-            element: <Home />
+            element: <Home />,
+        },
+        {
+            path: '/user',
+            element: <User />,
+        },
+        {
+            path: '/login',
+            element: <Login />,
         }
-    ]);
-    return routes;
+    ]
+    return useRoutes(routes);
 }
 export default GetRouters;
+
