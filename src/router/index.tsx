@@ -1,6 +1,7 @@
 import Home from '../pages/index/index';
 import Login from '../pages/login/index';
 import User from '../pages/user/index';
+import Calendar from '../pages/product/detail';
 import { Navigate } from 'react-router-dom';
 import { ChromeFilled, CrownFilled, SmileFilled, TabletFilled } from '@ant-design/icons';
 import Layout from '../components/Layout';
@@ -9,22 +10,34 @@ type routerType = {
     element: any,
     children?: Array<routerType>,
     index?: boolean,
-    icon?:any,
+    icon?: any,
     name?: string,
+    component?:string
 }
 const routers: routerType[] = [
     {
         path: '/',
         element: <Layout />,
-        icon: <SmileFilled />,
         children: [
             {
                 index: true,
+                name: '欢迎',
+                icon: <SmileFilled />,
                 element: <Home />
             },
             {
                 path: '/user',
-                element: <User />
+                name: '用户',
+                icon: <ChromeFilled />,
+                element: <User />,
+                component: './user',
+            },
+            {
+                path: '/calendar',
+                name: '日历',
+                icon: <ChromeFilled />,
+                element: <Calendar />,
+                component: './user',
             }
         ]
     },

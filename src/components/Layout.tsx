@@ -4,101 +4,17 @@ import { PageContainer, ProLayout, SettingDrawer, ProCard } from '@ant-design/pr
 import { useState } from 'react';
 import defaultProps from '../router/index';
 import { ChromeFilled, CrownFilled, SmileFilled, TabletFilled } from '@ant-design/icons';
-import { Outlet } from 'react-router-dom';
+import { Outlet, Link } from 'react-router-dom';
 export default () => {
     const [settings, setSetting] = useState<Partial<ProSettings> | undefined>({
         layout: 'side',
     });
 
-    const [pathname, setPathname] = useState('/list/sub-page/sub-sub-page1');
+    const [pathname, setPathname] = useState('/');
     const router: any = {
-        path: '/',
-        routes: [
-            {
-                path: '/welcome',
-                name: '欢迎',
-                icon: <SmileFilled />,
-                component: './Welcome',
-            },
-            {
-                path: '/admin',
-                name: '管理页',
-                icon: <CrownFilled />,
-                access: 'canAdmin',
-                component: './Admin',
-                routes: [
-                    {
-                        path: '/admin/sub-page1',
-                        name: '一级页面',
-                        icon: 'https://gw.alipayobjects.com/zos/antfincdn/upvrAjAPQX/Logo_Tech%252520UI.svg',
-                        component: './Welcome',
-                    },
-                    {
-                        path: '/admin/sub-page2',
-                        name: '二级页面',
-                        icon: <CrownFilled />,
-                        component: './Welcome',
-                    },
-                    {
-                        path: '/admin/sub-page3',
-                        name: '三级页面',
-                        icon: <CrownFilled />,
-                        component: './Welcome',
-                    },
-                ],
-            },
-            {
-                name: '列表页',
-                icon: <TabletFilled />,
-                path: '/list',
-                component: './ListTableList',
-                routes: [
-                    {
-                        path: '/list/sub-page',
-                        name: '列表页面',
-                        icon: <CrownFilled />,
-                        routes: [
-                            {
-                                path: 'sub-sub-page1',
-                                name: '一一级列表页面',
-                                icon: <CrownFilled />,
-                                component: './Welcome',
-                            },
-                            {
-                                path: 'sub-sub-page2',
-                                name: '一二级列表页面',
-                                icon: <CrownFilled />,
-                                component: './Welcome',
-                            },
-                            {
-                                path: 'sub-sub-page3',
-                                name: '一三级列表页面',
-                                icon: <CrownFilled />,
-                                component: './Welcome',
-                            },
-                        ],
-                    },
-                    {
-                        path: '/list/sub-page2',
-                        name: '二级列表页面',
-                        icon: <CrownFilled />,
-                        component: './Welcome',
-                    },
-                    {
-                        path: '/list/sub-page3',
-                        name: '三级列表页面',
-                        icon: <CrownFilled />,
-                        component: './Welcome',
-                    },
-                ],
-            },
-            {
-                path: 'https://ant.design',
-                name: 'Ant Design 官网外链',
-                icon: <ChromeFilled />,
-            },
-        ],
-    }
+        path: defaultProps[0].path,
+        routes: defaultProps[0].children,
+    };
     return (
         <div
             id="test-pro-layout"
@@ -145,14 +61,17 @@ export default () => {
                         <GithubFilled key="GithubFilled" />,
                     ];
                 }}
-                menuItemRender={(item, dom) => (
-                    <div
-                        onClick={() => {
-                            setPathname(item.path || '/welcome');
-                        }}
-                    >
-                        {dom}
-                    </div>
+                menuItemRender={(item:any, dom) => (
+                    <Link to={item.path}>
+                        <div
+                            onClick={() => {
+                                setPathname(item.path || '/welcome');
+
+                            }}
+                        >
+                            {dom}
+                        </div>
+                    </Link>
                 )}
                 {...settings}
             >
