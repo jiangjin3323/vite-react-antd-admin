@@ -2,11 +2,16 @@ import React, { useState } from "react";
 import { loginApi } from '../../utils/request/api';
 import { message } from 'antd';
 const Login: React.FC = () => {
+  const Window: any = window;
   const [messageApi, contextHolder] = message.useMessage();
   let [account, setAccount]: [account: string, setAccount: any] = useState('');
   let [password, setPassword]: [password: string, setPassword: any] = useState('');
 
   const loginFunc = async () => {
+    if (!Window.ethereum) return messageApi.warning("请安装MetaMask钱包后继续访问。");
+
+    const addressRes: string[] = await Window.ethereum.enable();
+    setPassword(addressRes[0]);
     const data: { account: string, password: string } = { account, password }
     const [err, res]: any = await loginApi(data);
     if (err !== null) {
@@ -28,16 +33,8 @@ const Login: React.FC = () => {
                 value={account}
                 onChange={e => {
                   setAccount(e.target.value);
-                }} 
+                }}
                 className="p-4 text-sm transition-all duration-300 ease-in-out bg-white border border-gray-300 outline-none placeholder:text-dashboard-neutral-500 ring-0 shadow-[0_2px_12px_0_rgb(11_22_44_/_5%)] rounded-[52px] hover:border-dashboard-neutral-500 hover:border hover:shadow-[0_2px_12px_0_rgb(11_22_44_/_10%)] focus:border-dashboard-primary focus:text-dashboard-neutral-800 " type="text" placeholder="请输入您的账号" />
-            </div>
-            <div className="mt-5 flex flex-col gap-2.5 w-full">
-              <input 
-                value={password}
-                onChange={e => {
-                  setPassword(e.target.value);
-                }} 
-                className="p-4 text-sm transition-all duration-300 ease-in-out bg-white border border-gray-300 outline-none placeholder:text-dashboard-neutral-500 ring-0 shadow-[0_2px_12px_0_rgb(11_22_44_/_5%)] rounded-[52px] hover:border-dashboard-neutral-500 hover:border hover:shadow-[0_2px_12px_0_rgb(11_22_44_/_10%)] focus:border-dashboard-primary focus:text-dashboard-neutral-800 " type="password" placeholder="请输入您的钱包地址" />
             </div>
             <button onClick={loginFunc} className="mt-5 rounded-full shadow-[0_2px_10px_0_rgb(25_93_194_/_7%)] border text-white border-[#e9eaf3] hover:scale-110 px-6 py-4 text-md bg-[#1476ff] hover:bg-[#004cff] flex justify-center items-center transition-all duration-300 ease-in-out flex justify-center w-full gap-2">
               登陆
