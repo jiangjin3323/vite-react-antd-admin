@@ -1,5 +1,4 @@
 import axios from "axios";
-import { useSelector } from 'react-redux'
 // 创建 axios 实例
 const instance = axios.create({
   baseURL: "http://localhost:3200/api/v1/",
@@ -11,7 +10,7 @@ const instance = axios.create({
 // 添加请求拦截器
 instance.interceptors.request.use(
   async (config) => {
-    const token: string | null  = sessionStorage.getItem('TOKEN');
+    const token: string | null = sessionStorage.getItem('TOKEN');
     // 在发送请求之前做些什么
     // console.log("请求拦截器", config);
     config.headers['Authorization'] = token ? token : '';
@@ -34,6 +33,9 @@ instance.interceptors.response.use(
   },
   (error): any => {
     console.log(error);
+    if (error?.response.status === 401) {
+      sessionStorage.clear();
+    }
     // 对响应错误做点什么
     // console.log("响应错误", error);
     return [error?.response?.data, null];
