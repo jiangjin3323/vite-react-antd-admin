@@ -1,4 +1,5 @@
 import axios from "axios";
+import { useSelector } from 'react-redux'
 // 创建 axios 实例
 const instance = axios.create({
   baseURL: "http://localhost:3200/api/v1/",
@@ -10,12 +11,10 @@ const instance = axios.create({
 // 添加请求拦截器
 instance.interceptors.request.use(
   async (config) => {
-    // const token: string = useSelector((state: any) => state.token);
-    // const token:string = useSelector((state:any) => state.token);
-    
+    const token: string | null  = sessionStorage.getItem('TOKEN');
     // 在发送请求之前做些什么
     // console.log("请求拦截器", config);
-    config.headers['Authorization'] = '';
+    config.headers['Authorization'] = token ? token : '';
     return config;
   },
   (error) => {

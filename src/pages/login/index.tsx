@@ -9,25 +9,27 @@ const Login: React.FC = () => {
   const navigate: any = useNavigate();
   const [messageApi, contextHolder] = message.useMessage();
   let [account, setAccount]: [account: string, setAccount: any] = useState('');
-  let [password, setPassword]: [password: string, setPassword: any] = useState('123456');
+  let [password, setPassword]: [password: string, setPassword: any] = useState('');
 
   const btnFunc = async () => {
     if (!Window.ethereum) return messageApi.warning("请安装MetaMask钱包后继续访问。");
-    // const addressRes: string[] = await Window.ethereum.enable();
-    // setPassword(addressRes[0]);
-    loginFunc();
+    const addressRes: string[] = await Window.ethereum.enable();
+    if(!addressRes) return;
+    setPassword(addressRes[0]);
+    loginFunc({account,password:addressRes[0]});
   }
 
-  const loginFunc = async () => {
-    const data: { account: string, password: string } = { account, password }
+  const loginFunc = async (data:{ account: string, password: string }) => {
+    if(!data.password) return messageApi.warning("请输入MetaMask钱包地址");
     const [err, res]: any = await loginApi(data);
     if (err !== null) {
       console.log(err, res)
       messageApi.error(err.msg);
       return;
     }
+    sessionStorage.setItem('TOKEN',res.data.sign)
     dispatch({ type: 'SET_TOKEN', payload: res.data.sign });
-    navigate('/user');
+    navigate('/');
   }
 
   return (
