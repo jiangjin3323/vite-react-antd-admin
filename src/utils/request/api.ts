@@ -23,3 +23,11 @@ export const addProductApi = (data: any = {}) => axios.post('product', data);
 export const deleteProductApi = (data: any = {}) => axios.post('product/delete', data);
 export const updateProductApi = (data: any = {}) => axios.post('product/update', data);
 /*  product end */
+
+/*  header start */
+export const getHeaderListApi = () => axios.get(`header`);
+export const addHeaderApi = (data: any = {}) => axios.post('header', data);
+export const deleteHeaderApi = (data: any = {}) => axios.post('header/delete', data);
+export const updateHeaderApi = (data: any = {}) => axios.post('hader/update', data);
+/*  header end */
+
