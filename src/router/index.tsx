@@ -21,7 +21,7 @@ const routers:any = [
             {
                 path:'/',
                 index: true,
-                name: '欢迎',
+                name: '轮播部分',
                 icon: <SmileFilled />,
                 element: <Home />
             },

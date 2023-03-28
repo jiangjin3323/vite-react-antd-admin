@@ -10,11 +10,6 @@ interface DataType {
     updataTime: Date,
     createTime: Date,
 }
-interface ModalProps {
-    visible: boolean;
-    onCancel: () => void;
-    onSubmit: (values: any) => void;
-}
 
 const App: React.FC = () => {
     const columns: ColumnsType<DataType> = [
