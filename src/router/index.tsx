@@ -1,7 +1,7 @@
 import Home from '../pages/index/index';
 import Login from '../pages/login/index';
 import User from '../pages/user/index';
-import Calendar from '../pages/product/detail';
+import Product from '../pages/product/index';
 import { ChromeFilled, CrownFilled, SmileFilled, TabletFilled } from '@ant-design/icons';
 import Layout from '../components/Layout';
 // type routerType = {
@@ -33,11 +33,11 @@ const routers:any = [
                 component: './user',
             },
             {
-                path: '/calendar',
-                name: '日历',
+                path: '/product',
+                name: '产品',
                 icon: <ChromeFilled />,
-                element: <Calendar />,
-                component: './user',
+                element: <Product />,
+                component: './product',
             }
         ]
     },

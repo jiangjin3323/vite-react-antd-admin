@@ -15,3 +15,11 @@ export const addUserApi = (data: any = {}) => axios.post('user', data);
 export const deleteUserApi = (data: any = {}) => axios.post('user/delete', data);
 export const updateUserApi = (data: any = {}) => axios.post('user/update', data);
 /*  user end */
+
+
+/*  product start */
+export const getProductListApi = () => axios.get(`product`);
+export const addProductApi = (data: any = {}) => axios.post('product', data);
+export const deleteProductApi = (data: any = {}) => axios.post('product/delete', data);
+export const updateProductApi = (data: any = {}) => axios.post('product/update', data);
+/*  product end */
