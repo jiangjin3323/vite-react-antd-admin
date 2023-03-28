@@ -61,17 +61,13 @@ export default () => {
                         <GithubFilled key="GithubFilled" />,
                     ];
                 }}
-                menuItemRender={(item:any, dom) => (
-                    <Link to={item.path}>
-                        <div
-                            onClick={() => {
-                                setPathname(item.path || '/welcome');
+                menuItemRender={(item: any, dom) => (
+                    <div onClick={() => { setPathname(item.path || '/') }}>
+                        <Link to={item.path}>
+                            <div> {dom} </div>
+                        </Link>
+                    </div>
 
-                            }}
-                        >
-                            {dom}
-                        </div>
-                    </Link>
                 )}
                 {...settings}
             >
