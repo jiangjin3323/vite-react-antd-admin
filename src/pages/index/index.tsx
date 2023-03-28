@@ -81,6 +81,7 @@ const App: React.FC = () => {
         }
         setSelectedRowKeys([]);
         setLoading(false);
+        messageApi.success('ok');
         getBannerListFunc();
     };
     const onSelectChange = (newSelectedRowKeys: React.Key[]) => {
